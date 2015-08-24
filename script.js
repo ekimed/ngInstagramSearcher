@@ -17,9 +17,10 @@ angular.module('myInstaApp', [])
 			return result;
 		};
 
-		$scope.submit = function () {
+		$scope.showText = false;
+
+		$scope.submit = function (form) {
 			url = 'https://api.instagram.com/v1/tags/' + $scope.tag + '/media/recent'; 
-			console.log(url);
 			request = {
 				client_id: 'afa76b5149a44e5bb53f871ec2682479',
 				callback: 'JSON_CALLBACK'
@@ -31,10 +32,13 @@ angular.module('myInstaApp', [])
 				params: request
 			})
 			.success(function (result) {
-				console.log(result);
 				parsed_data = parser(result);
+				$scope.numberResult = parsed_data.length;
 				$scope.items = parsed_data;
-				console.log(parsed_data);
+				$scope.showText = true;
+
+				form.$setPristine();
+				$scope.tag = null;
 
 
 			})
