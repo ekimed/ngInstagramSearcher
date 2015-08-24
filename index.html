@@ -5,15 +5,20 @@
 	<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/yeti/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
 	<title>Instagram Searcher</title>
 </head>
 <body>
 	<div class="container" ng-controller="myCtrl">
 		<h1>Instagram Searcher</h1>
-		<form class="searchForm" ng-submit="submit(searchForm)" novalidate>
-			<input type="text" class="searchbox" ng-model="tag"><button type="submit">Submit</button>
+		<form class="searchForm" name="searchForm" ng-submit="submit(searchForm)" novalidate>
+			<input type="text" class="searchbox" ng-model="tag" required><button type="submit">Submit</button>
 		</form>
-		<div class="searchResultText" ng-show="showText">We found {{numberResult}} results for "{{tag}}"</div>
+		<div class="resMessages" ng-messages="res">
+			<div class="searchResultText" ng-message="foundResult">We found {{numberResult}} results for "{{copySearchTag}}"</div>
+			<div class="alertMsg" ng-message="noResult">{{res.noResult}}</div>
+		</div>
+		
 		<div class="imagesWrapper">
 			<div class="row" ng-repeat="item in items" track by $index" ng-if="$index%4==0"">
 				<div class="col-sm-4"><img ng-src="{{items[$index].url}}"></div>

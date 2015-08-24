@@ -1,4 +1,4 @@
-angular.module('myInstaApp', [])
+angular.module('myInstaApp', ['ngMessages'])
 	.controller('myCtrl', function ($scope, $http) {
 		var url,
 			request,
@@ -18,6 +18,7 @@ angular.module('myInstaApp', [])
 		};
 
 		$scope.showText = false;
+		$scope.res = {};
 
 		$scope.submit = function (form) {
 			url = 'https://api.instagram.com/v1/tags/' + $scope.tag + '/media/recent'; 
@@ -36,9 +37,16 @@ angular.module('myInstaApp', [])
 				$scope.numberResult = parsed_data.length;
 				$scope.items = parsed_data;
 				$scope.showText = true;
-
+				// save copy of search tag
+				$scope.copySearchTag = angular.copy($scope.tag);
 				form.$setPristine();
 				$scope.tag = null;
+
+				if (!parsed_data.length) {
+					$scope.res['noResult'] = 'No results found.';
+				} else {
+					$scope.res['foundResult'] = parsed_data.length;
+				}
 
 
 			})
