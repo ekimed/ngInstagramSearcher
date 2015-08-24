@@ -10,6 +10,7 @@ angular.module('myInstaApp', ['ngMessages'])
 
 			for (var i = 0; i < data.length; i++) {
 				if (data[i].images.low_resolution) {
+					data[i].images.low_resolution.link = data[i].link;
 					result.push(data[i].images.low_resolution);
 				}
 			}
@@ -37,11 +38,15 @@ angular.module('myInstaApp', ['ngMessages'])
 				$scope.numberResult = parsed_data.length;
 				$scope.items = parsed_data;
 				$scope.showText = true;
+
 				// save copy of search tag
 				$scope.copySearchTag = angular.copy($scope.tag);
+
+				// clear search form
 				form.$setPristine();
 				$scope.tag = null;
 
+				// set search result text
 				if (!parsed_data.length) {
 					$scope.res['noResult'] = 'No results found.';
 				} else {

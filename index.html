@@ -21,9 +21,9 @@
 		
 		<div class="imagesWrapper">
 			<div class="row" ng-repeat="item in items" track by $index" ng-if="$index%4==0"">
-				<div class="col-sm-4"><img ng-src="{{items[$index].url}}"></div>
-				<div class="col-sm-4"><img ng-src="{{items[$index + 1].url}}"></div>
-				<div class="col-sm-4"><img ng-src="{{items[$index + 2].url}}"></div>
+				<div class="col-sm-4"><a target="_blank" href="{{items[$index].link}}"><img ng-src="{{items[$index].url}}"></a></div>
+				<div class="col-sm-4"><a target="_blank"href="{{items[$index+1].link}}"><img ng-src="{{items[$index + 1].url}}"></a></div>
+				<div class="col-sm-4"><a target="_blank" href="{{items[$index+2].link}}"><img ng-src="{{items[$index + 2].url}}"></div></a>
 			</div>
 		</div>
 		
