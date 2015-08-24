@@ -1,0 +1,19 @@
+h1 {
+	text-align: center;
+}
+
+.searchForm, .imagesWrapper {
+	text-align: center;
+}
+
+.imagesWrapper {
+	padding-top: 40px;
+}
+
+.row {
+	padding-bottom: 20px;
+}
+
+button[type="submit"] {
+	margin-left: 30px;
+}
