@@ -57,6 +57,7 @@ angular.module('myInstaApp', ['ngMessages'])
 			})
 			.error(function (err) {
 				console.log(err);
+				$scope.res['errorServer'] = err;
 			})
 
 		}
