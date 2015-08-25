@@ -2,11 +2,11 @@ h1 {
 	text-align: center;
 }
 
-.searchForm, .imagesWrapper, .searchResultText {
+.searchForm, .imagesWrapper, .searchResultText, .waitText {
 	text-align: center;
 }
 
-.imagesWrapper, .searchResultText {
+.imagesWrapper, .searchResultText, .waitText {
 	padding-top: 40px;
 }
 

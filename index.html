@@ -14,6 +14,7 @@
 		<form class="searchForm" name="searchForm" ng-submit="submit(searchForm)" novalidate>
 			<input type="text" class="searchbox" ng-model="tag" required><button type="submit">Submit</button>
 		</form>
+		<div class="waitText" ng-show="waitText">Searching Instragram for photos tagged with "{{tag}}"...</div>
 		<div class="resMessages" ng-messages="res">
 			<div class="searchResultText" ng-message="foundResult">We found {{numberResult}} results for "{{copySearchTag}}"</div>
 			<div class="alertMsg" ng-message="noResult">{{res.noResult}}</div>

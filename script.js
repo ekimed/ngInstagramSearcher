@@ -1,5 +1,5 @@
 angular.module('myInstaApp', ['ngMessages'])
-	.controller('myCtrl', function ($scope, $http) {
+	.controller('myCtrl', function ($scope, $http, $q) {
 		var url,
 			request,
 			parsed_data;
@@ -18,6 +18,16 @@ angular.module('myInstaApp', ['ngMessages'])
 			return result;
 		};
 
+		var wait = function () {
+			var defer = $q.defer();
+
+			setTimeout(function () {
+				defer.resolve();
+			}, 2000);
+
+			return defer.promise;
+		}
+
 		$scope.showText = false;
 		$scope.res = {};
 
@@ -27,7 +37,7 @@ angular.module('myInstaApp', ['ngMessages'])
 				client_id: 'afa76b5149a44e5bb53f871ec2682479',
 				callback: 'JSON_CALLBACK'
 			};
-
+			$scope.waitText = true;
 			$http({
 				method: 'JSONP',
 				url: url,
@@ -35,23 +45,33 @@ angular.module('myInstaApp', ['ngMessages'])
 			})
 			.success(function (result) {
 				parsed_data = parser(result);
-				$scope.numberResult = parsed_data.length;
-				$scope.items = parsed_data;
-				$scope.showText = true;
 
 				// save copy of search tag
 				$scope.copySearchTag = angular.copy($scope.tag);
 
-				// clear search form
-				form.$setPristine();
-				$scope.tag = null;
+				wait().then(function () {
+					$scope.waitText = false;
+					$scope.numberResult = parsed_data.length;
+					$scope.items = parsed_data;
+					
+					// set search result text
+					if (!parsed_data.length) {
+						$scope.res['noResult'] = 'No results found.';
+					} else {
+						$scope.res['foundResult'] = parsed_data.length;
+					}
 
-				// set search result text
-				if (!parsed_data.length) {
-					$scope.res['noResult'] = 'No results found.';
-				} else {
-					$scope.res['foundResult'] = parsed_data.length;
-				}
+					// clear search form
+					form.$setPristine();
+					$scope.tag = null;
+				});
+				
+
+				
+
+				
+
+				
 
 
 			})
