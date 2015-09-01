@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-animate.js"></script>
 	<title>Instagram Searcher</title>
 </head>
 <body>
@@ -22,10 +23,8 @@
 		</div>
 		
 		<div class="imagesWrapper">
-			<div class="row" ng-repeat="item in items" track by $index" ng-if="$index%4==0"">
-				<div class="col-sm-4"><a target="_blank" href="{{items[$index].link}}"><img ng-src="{{items[$index].url}}"></a></div>
-				<div class="col-sm-4"><a target="_blank"href="{{items[$index+1].link}}"><img ng-src="{{items[$index + 1].url}}"></a></div>
-				<div class="col-sm-4"><a target="_blank" href="{{items[$index+2].link}}"><img ng-src="{{items[$index + 2].url}}"></div></a>
+			<div class="col-lg-4" ng-repeat="item in items">
+				<a target="_blank" href="{{item.link}}"><img ng-src="{{item.url}}"></a>
 			</div>
 		</div>
 		
